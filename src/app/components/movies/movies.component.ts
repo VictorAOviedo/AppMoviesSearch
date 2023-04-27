@@ -16,7 +16,12 @@ export class MoviesComponent {
   getMovies(searchTerm: string) {
     this.movieService.getMovies(searchTerm).subscribe(data => {
       console.log(data);
-      this.movies = data.Search;
+      if (data.Response === "False") {
+        this.movies = [];
+      } else {
+        this.movies = data.Search;
+      }
+
     })
   }
 
