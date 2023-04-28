@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Movie } from 'src/app/interfaces/movies';
 
 @Component({
   selector: 'app-card-movie',
@@ -6,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./card-movie.component.css']
 })
 export class CardMovieComponent {
-  @Input('movie') movie: any;
+  @Input('movie') movie!: Movie;
 
 
   getImagen(){
