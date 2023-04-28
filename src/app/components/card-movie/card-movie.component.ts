@@ -12,7 +12,8 @@ export class CardMovieComponent {
 
   getImagen(){
     if(this.movie.Poster === 'N/A'){
-      return 'http://via.placeholder.com/600';
+      return 'https://1.bp.blogspot.com/-fYZYXD9d3mA/VNMDxHATK-I/AAAAAAAAJeM/vUFl2Tw5nLE/s1600/word-llenar.jpg';
+      /*return 'http://via.placeholder.com/600';*/
     }else{
       return this.movie.Poster;
     }

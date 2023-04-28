@@ -104,6 +104,10 @@ h1 {
   font-family: var(--font-raleway);
 }
 
+.withoutResult{
+  width: 20%;
+}
+
 .container {
   width: 100%;
   margin-top: 3rem;
@@ -175,7 +179,8 @@ h1 {
 .movie div:nth-of-type(3) h3 {
   margin-top: 5px;
   font-family: "Roboto Slab", serif;
-  color: #f9d3b4;
+  color: rgb(203, 201, 198);
+  padding: 25px;
 }
 
 .movie:hover div:nth-of-type(2) {

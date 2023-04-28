@@ -4,11 +4,11 @@
         <input type="text" #movieSearchInput placeholder="Buscar pelicula">
         
     </div>
-    <div *ngIf="movies.length > 0; else empty" class="container">
+    <div *ngIf="(movies$ | async) as movies; else empty" class="container">
         <app-card-movie *ngFor="let movie of movies" [movie]="movie"></app-card-movie>
     </div>
     <ng-template #empty class="empty">
         <h3>No se encontraron Peliculas</h3>
-        <img class="sinResultado"  src="../../../assets/sinResultado.png" alt="Sin resultados">
+        <img class="withoutResult"  src="../../../assets/sinResultado.png" alt="Sin resultados">
     </ng-template>
 </div>

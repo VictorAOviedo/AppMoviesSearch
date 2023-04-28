@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, map, tap } from 'rxjs';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subscription, debounceTime, distinct, filter, fromEvent, map, switchMap, tap } from 'rxjs';
 import { Movie } from 'src/app/interfaces/movies';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -11,26 +11,20 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviesComponent implements OnInit {
   movies: Movie[] = [];
   @ViewChild('movieSearchInput', { static: true }) movieSearchInput!: ElementRef
+  movies$!: Observable<Movie[]>
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    fromEvent<Event>(this.movieSearchInput.nativeElement, 'keyup').pipe(
+    this.movies$ = fromEvent<Event>(this.movieSearchInput.nativeElement, 'keyup').pipe(
       map((event: Event) => {
         const searchTerm = (event.target as HTMLInputElement).value;
-    return searchTerm
-  }),
-  tap((searchTerm: string) => console.log(searchTerm))
-    ).subscribe((searchTerm: string) => {
-      this.getMovies(searchTerm)
-    })
+        return searchTerm
+      }),
+      filter((searchTerm: string) => searchTerm.length > 3),
+      debounceTime(500),
+      distinct(),
+      switchMap((searchTerm: string) => this.movieService.getMovies(searchTerm))
+    )
   }
-
-getMovies(searchTerm: string) {
-  this.movieService.getMovies(searchTerm).subscribe(movies => {
-    console.log(movies);
-    this.movies = movies !== undefined ? movies : [];
-  })
-}
-
 }
