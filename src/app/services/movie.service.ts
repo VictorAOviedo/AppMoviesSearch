@@ -9,7 +9,7 @@ import { Movie } from '../interfaces/movies';
 })
 export class MovieService {
 
-  API_URL: string = 'http://www.omdbapi.com/?apikey=d184967a';
+  API_URL: string = '//www.omdbapi.com/?apikey=d184967a';
 
   constructor(private http: HttpClient) { }
 
